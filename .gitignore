@@ -24,3 +24,6 @@ google_consumer-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+viastore-hlg.json
+secrets.json

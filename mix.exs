@@ -22,7 +22,8 @@ defmodule GoogleConsumer.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:google_api_retail, "~> 0.7.0"}
+      {:google_api_retail, "~> 0.7.0"},
+      {:goth, "~> 1.2.0"}
     ]
   end
 end
