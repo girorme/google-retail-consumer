@@ -2,20 +2,20 @@
 
 **TODO: Add description**
 
-## Installation
+## Usage
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `google_consumer` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:google_consumer, "~> 0.1.0"}
-  ]
-end
+#### install and mix
+```
+$ export GOOGLE_APPLICATION_CREDENTIALS=secrets.json
+$ mix deps.get
+$ iex -S mix
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/google_consumer>.
+#### call
+```elixir
+iex> {:ok, token} = Goth.Token.for_scope("https://www.googleapis.com/auth/cloud-platform")
 
+iex> conn = GoogleApi.Retail.V2.Connection.new(token.token)
+
+iex> GoogleApi.Retail.V2.Api.Projects.retail_projects_locations_catalogs_list(conn, "projects/project-name/locations/global")
+```
