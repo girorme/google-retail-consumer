@@ -24,11 +24,14 @@ Open the following link in your brower:
 https://accounts.google.com/o/oauth2/auth?[some-long-url]
 Enter verification code:
 ```
-Copy the code param value from browser url:
+Click on the link above, wait the browser opens and copy the code param value from browser url:
 > http://localhost/auth/callback?code=TOKEN&scope=https://www.googleapis.com/auth/cloud-platform
 
-Response:
+Fill the verification code and wait response:
+
 > Token: [your-oauth-token]
+
+Copy the token from terminal and put in the `Connection.new` call
 
 ```
 conn = GoogleApi.Retail.V2.Connection.new("TOKEN_HERE")
