@@ -1,21 +1,40 @@
-# GoogleConsumer
+# GoogleRetailConsumer
 
-**TODO: Add description**
+Consume google retail using: [Elixir google api](https://github.com/googleapis/elixir-google-api)
 
 ## Usage
 
-#### install and mix
+### With service account
 ```
 $ export GOOGLE_APPLICATION_CREDENTIALS=secrets.json
 $ mix deps.get
 $ iex -S mix
+
+iex> {:ok, token} = Goth.Token.for_scope("https://www.googleapis.com/auth/cloud-platform")
+iex> conn = GoogleApi.Retail.V2.Connection.new(token.token)
 ```
 
-#### call
+### With Oauth (debug + development)
+```
+$ export GOOGLE_CLIENT_ID=[YOUR-OAUTH-CLIENT-ID]
+$ export GOOGLE_CLIENT_SECRET=[YOUR-OAUTH-CLIENT-SECRET]
+$ mix google_apis.auth https://www.googleapis.com/auth/cloud-platform
+...
+Open the following link in your brower:
+https://accounts.google.com/o/oauth2/auth?[some-long-url]
+Enter verification code:
+```
+Copy the code param value from browser url:
+> http://localhost/auth/callback?code=TOKEN&scope=https://www.googleapis.com/auth/cloud-platform
+
+Response:
+> Token: [your-oauth-token]
+
+```
+conn = GoogleApi.Retail.V2.Connection.new("TOKEN_HERE")
+```
+---
+#### Call some method
 ```elixir
-iex> {:ok, token} = Goth.Token.for_scope("https://www.googleapis.com/auth/cloud-platform")
-
-iex> conn = GoogleApi.Retail.V2.Connection.new(token.token)
-
 iex> GoogleApi.Retail.V2.Api.Projects.retail_projects_locations_catalogs_list(conn, "projects/project-name/locations/global")
 ```
