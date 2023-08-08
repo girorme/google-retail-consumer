@@ -21,7 +21,7 @@ $ mix deps.get
 $ iex -S mix
 ```
 
-#### Call some method
+#### Call resources
 ```elixir
 iex> {:ok, token} = Goth.Token.for_scope("https://www.googleapis.com/auth/cloud-platform")
 iex> conn = GoogleApi.Retail.V2.Connection.new(token.token)
