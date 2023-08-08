@@ -3,8 +3,18 @@
 Consume google retail using: [Elixir google api](https://github.com/googleapis/elixir-google-api)
 
 ## Usage
+### Install deps (add to mix.exs)
+```elixir
+defp deps do
+  [
+    # ...
+    {:google_api_retail, "~> 0.7.0"},
+    {:goth, "~> 1.2.0"}
+  ]
+end
+```
 
-### With service account
+### Configure service account
 ```
 $ export GOOGLE_APPLICATION_CREDENTIALS=secrets.json
 $ mix deps.get
@@ -14,7 +24,14 @@ iex> {:ok, token} = Goth.Token.for_scope("https://www.googleapis.com/auth/cloud-
 iex> conn = GoogleApi.Retail.V2.Connection.new(token.token)
 ```
 
-### With Oauth (debug + development)
+#### Call some method
+```elixir
+iex> GoogleApi.Retail.V2.Api.Projects.retail_projects_locations_catalogs_list(conn, "projects/project-name/locations/global")
+```
+
+
+---
+### Configure with Oauth (debug + development)
 ```
 $ export GOOGLE_CLIENT_ID=[YOUR-OAUTH-CLIENT-ID]
 $ export GOOGLE_CLIENT_SECRET=[YOUR-OAUTH-CLIENT-SECRET]
@@ -35,9 +52,4 @@ Copy the token from terminal and put in the `Connection.new` call
 
 ```
 conn = GoogleApi.Retail.V2.Connection.new("TOKEN_HERE")
-```
----
-#### Call some method
-```elixir
-iex> GoogleApi.Retail.V2.Api.Projects.retail_projects_locations_catalogs_list(conn, "projects/project-name/locations/global")
 ```
