@@ -14,9 +14,25 @@ defp deps do
 end
 ```
 
-### Configure service account
+Configure with service account
+---
+
+#### Add env var:
 ```
-$ export GOOGLE_APPLICATION_CREDENTIALS=secrets.json
+export YOUR_GOOGLE_CREDENTIALS='{
+... SERVICE ACCOUNT CONTENT
+}'
+```
+**Note: DON'T ESCAPE `\n` FROM `private_key` service_account.json**
+
+#### Add config
+```
+import Config
+config :goth, json: {:system, "YOUR_GOOGLE_CREDENTIALS"}
+```
+
+#### Run iex
+```
 $ mix deps.get
 $ iex -S mix
 ```
